@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Approval for NGO Requests</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #F2ACB9; /* Pink */
+            --light: #F2ACB9;
+            --dark: #F2ACB9;
+        }
+
+        .fw-medium {
+            font-weight: 600 !important;
+        }
+
+        .fw-semi-bold {
+            font-weight: 700 !important;
+        }
+
+        body {
+            background-color: var(--light);
+            font-family: "Arial", sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            margin-top: 30px;
+            overflow-y: auto;
+            height: 400px;
+        }
+
+        .table th {
+            background-color: #e9ecef; /* Light gray for table header */
+            font-weight: bold;
+        }
+
+        .approve-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--dark);
+        }
+
+        .back-button:hover {
+            background-color: var(--primary);
+        }
+
+        /* NGO Name Display */
+        .ngo-name {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: var(--dark);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Back Button -->
+    <a href="index.html" style="text-decoration: none">
+        <button class="back-button">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+    </a>
+
+    <div class="container">
+        <h1>Nearby Shops for NGO Request</h1>
+
+        <!-- Display Selected NGO Name -->
+        <div class="ngo-name" id="ngoName">Selected NGO: Loading...</div>
+
+        <p>Below are the shops near the NGO's location:</p>
+
+        <div class="table-container">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Shop Name</th>
+                        <th scope="col">Location (Lat, Lng)</th>
+                        <th scope="col">Approve</th>
+                    </tr>
+                </thead>
+                <tbody id="selectedShopsTableBody">
+                    <!-- Rows will be inserted dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <button id="sendEmailButton" class="approve-button">Send Emails</button>
+    </div>
+
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcfm6dAMCDP6q4mzXBNi4jBUbxi0GMFn4&libraries=places&callback=initMap"></script>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("UZqrziIL4A8gIDpZb"); // Replace with your EmailJS user ID
+        })();
+
+        // Retrieve the selected NGO data from localStorage
+        const selectedNGO = JSON.parse(localStorage.getItem("selectedNGO"));
+
+        if (!selectedNGO) {
+            alert('No NGO selected. Please go back and choose an NGO.');
+            window.location.href = "index.html"; // Redirect back if no NGO is selected
+        }
+
+        // Display the selected NGO name
+        document.addEventListener('DOMContentLoaded', function() {
+            const ngoNameElement = document.getElementById('ngoName');
+            ngoNameElement.textContent = `Selected NGO: ${selectedNGO.name}`;
+        });
+
+        let filteredShops = [];
+
+        // Preexisting shops data
+        const preexistingShops = [
+            { name: "Stationery Hub Wholesale", lat: 19.0762, lng: 72.8779 },
+            { name: "Grain Masters Wholesale", lat: 19.0758, lng: 72.8783 },
+            { name: "Office Supplies Depot", lat: 19.0765, lng: 72.8775 },
+            { name: "Premium Grains Wholesale", lat: 19.0767, lng: 72.8785 }
+        ];
+
+        // Initialize Google Maps and Places Service
+        function initMap() {
+            const location = new google.maps.LatLng(selectedNGO.lat, selectedNGO.lng);
+            const map = new google.maps.Map(document.createElement('div')); // Dummy map
+            const service = new google.maps.places.PlacesService(map);
+
+            // Fetch nearby shops with specific types
+            function getNearbyShops() {
+                const shopRequest = {
+                    location: location,
+                    radius: '2000', // 2 km radius
+                    type: ['store'],
+                };
+
+                service.nearbySearch(shopRequest, function(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        filteredShops = results.map(shop => ({
+                            name: shop.name,
+                            geometry: shop.geometry,
+                        }));
+
+                        // Append preexisting shops if no new shops are found
+                        if (filteredShops.length === 0) {
+                            console.warn('No eligible shops found via Google Places API. Using preexisting shops.');
+                            filteredShops = preexistingShops;
+                        }
+
+                        displayShops(filteredShops);
+                    } else {
+                        console.error('Error fetching shops via Google Places API:', status);
+                        // Use preexisting shops in case of API error
+                        filteredShops = preexistingShops;
+                        displayShops(filteredShops);
+                    }
+                });
+            }
+
+            // Display shops in the table
+            function displayShops(shops) {
+                const tableBody = document.getElementById('selectedShopsTableBody');
+                tableBody.innerHTML = ''; // Clear previous results
+
+                shops.forEach(shop => {
+                    const row = document.createElement('tr');
+
+                    // Shop Name
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = shop.name;
+                    row.appendChild(nameCell);
+
+                    // Location
+                    const locationCell = document.createElement('td');
+                    locationCell.textContent = `(${shop.geometry.location.lat()}, ${shop.geometry.location.lng()})`;
+                    row.appendChild(locationCell);
+
+                    // Approve Checkbox
+                    const approveCell = document.createElement('td');
+                    const approveCheckbox = document.createElement('input');
+                    approveCheckbox.type = 'checkbox';
+                    approveCheckbox.classList.add('shop-checkbox');
+                    approveCell.appendChild(approveCheckbox);
+                    row.appendChild(approveCell);
+
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Initial fetch of nearby shops
+            getNearbyShops();
+        }
+
+        document.getElementById('sendEmailButton').addEventListener('click', () => {
+            const checkboxes = document.querySelectorAll('.shop-checkbox');
+            const selectedShops = [];
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    const row = checkbox.closest('tr');
+                    const shopName = row.cells[0].textContent;
+                    const shopLocation = row.cells[1].textContent;
+
+                    selectedShops.push({
+                        name: shopName,
+                        location: shopLocation,
+                    });
+                }
+            });
+
+            const messageBody = 'Hi, this is a notification regarding shop approvals for the following shops:\n' + 
+                selectedShops.map(shop => `${shop.name} at ${shop.location}`).join('\n');
+
+            const templateParams = {
+                to_email: 'qazisami76@gmail.com',
+                message: messageBody,
+            };
+
+
+
+            // Send the email only once with the compiled message for all selected shops
+            emailjs.send('service_g7s2wgc', 'template_ojg0fat', templateParams)
+                .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert(`Approved shops: ${selectedShops.map(shop => shop.name).join(', ')}`);
+                    moveToNextShop();
+                }, (error) => {
+                    console.log('FAILED...', error);
+                });
+
+            if (selectedShops.length === 0) {
+                alert('No shops selected for approval.');
+            }
+        });
+
+        // Function to move to the next shop in the round-robin sequence
+        function moveToNextShop() {
+            let currentShopIndex = parseInt(localStorage.getItem('currentShopIndex')) || 0;
+            const totalShops = filteredShops.length;
+
+            currentShopIndex = (currentShopIndex + 1) % totalShops;
+            localStorage.setItem('currentShopIndex', currentShopIndex);
+            localStorage.setItem('lastAssignedTime', Date.now());
+
+            // Reload the page to show the next shop
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>

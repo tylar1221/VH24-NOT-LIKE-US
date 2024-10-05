@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Tracker</title>
+    <style>
+        .donation-tracker {
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        .donation-tracker h2 {
+            text-align: center;
+            color: #ff4d94; /* Pink color */
+        }
+
+        .tracker-info {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333; /* Darker text for readability */
+        }
+
+        .progress-bar-container {
+            background-color: #ffb3d9; /* Light pink background for progress bar container */
+            border-radius: 5px;
+            height: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #ff4d94; /* Pink color for progress */
+            height: 100%;
+            width: 0%; /* Start at 0% */
+            transition: width 0.4s ease; /* Smooth transition for progress */
+        }
+
+        .tracker-buttons {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .tracker-buttons button {
+            background-color: #ff4d94; /* Pink button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 5px;
+        }
+
+        .tracker-buttons button:hover {
+            background-color: #ff3385; /* Darker pink on hover */
+        }
+
+        .donation-history {
+            margin-top: 20px;
+        }
+
+        .donation-history h3 {
+            color: #ff4d94; /* Pink color for history title */
+            text-align: center;
+        }
+
+        .donation-history ul {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0;
+        }
+
+        .donation-history li {
+            background-color: #fff4f9; /* Very light pink background */
+            border: 1px solid #ffb3d9; /* Light pink border */
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="donation-tracker">
+    <h2>Real-time Donation Tracker</h2>
+    <div class="tracker-info">
+        <p>Current Donations: <strong id="current-donations">Rs. 0</strong></p>
+        <p>Goal: <strong id="goal-amount">Rs. 100,000</strong></p>
+    </div>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="tracker-buttons">
+        <button onclick="simulateDonation(5000)">Donate Rs. 5000</button>
+        <button onclick="simulateDonation(10000)">Donate Rs. 10000</button>
+    </div>
+
+    <div class="donation-history">
+        <h3>Donation History</h3>
+        <ul id="history-list">
+            <!-- Donation history will be populated here -->
+        </ul>
+    </div>
+</div>
+
+<script>
+    let currentDonations = 0;
+    const goalAmount = 100000; // Goal amount
+    const donationHistory = [];
+
+    function updateProgress() {
+        const progressBar = document.getElementById('progress-bar');
+        const currentDonationsElement = document.getElementById('current-donations');
+        
+        // Update the current donations displayed
+        currentDonationsElement.textContent = 'Rs. ' + currentDonations;
+
+        // Calculate percentage of the goal reached
+        const percentage = (currentDonations / goalAmount) * 100;
+        progressBar.style.width = percentage + '%';
+    }
+
+    function updateHistory(amount) {
+        const historyList = document.getElementById('history-list');
+        const listItem = document.createElement('li');
+        listItem.textContent = `Donated Rs. ${amount} on ${new Date().toLocaleString()}`; // Corrected to use template literals
+        historyList.appendChild(listItem);
+    }
+
+    function simulateDonation(amount) {
+        currentDonations += amount; // Add the simulated donation amount
+        if (currentDonations > goalAmount) {
+            currentDonations = goalAmount; // Cap at the goal amount
+        }
+        updateProgress(); // Update the progress bar and displayed amounts
+        updateHistory(amount); // Add to donation history
+    }
+</script>
+
+</body>
+</html>

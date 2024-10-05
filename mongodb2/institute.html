@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Institute Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: calc(100% - 22px); /* Adjust for padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #F2ACB9; /* Blue color */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #F2ACB9; /* Darker blue on hover */
+        }
+
+        .redirect-message {
+            text-align: center;
+            margin-top: 15px;
+            color: #555;
+        }
+        
+        .redirect-message a {
+            color: #007BFF; /* Blue link color */
+            text-decoration: none;
+        }
+
+        .redirect-message a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Institute Login</h1>
+    <form action="/institute-login" method="POST">
+        <label for="institute_id">Institute ID:</label>
+        <input type="text" id="institute_id" name="institute_id" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+    
+    <div class="redirect-message">
+        <p>If you are not registered, <a href="http://localhost:5500/institute_registration.html">click here to register</a>.</p>
+    </div>
+</body>
+</html>

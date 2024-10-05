@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e7f0ff; /* Light blue background */
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #007bff; /* Blue color */
+        }
+
+        .user-type {
+            margin: 10px 0;
+        }
+
+        .user-type button {
+            background-color: #007bff; /* Blue button */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .user-type button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Select Login As</h2>
+    <div class="user-type">
+        <button onclick="redirectTo('http://localhost:5501/donor.html')">Donor</button>
+        <button onclick="redirectTo('http://localhost:5501/institute_registration.html')">Institute</button>
+        <button onclick="redirectTo('http://localhost:5501/shopkeeperreg.html')">Shop Keeper</button>
+        <button onclick="redirectTo('admin.html')">Admin</button>
+    </div>
+</div>
+
+<script>
+    function redirectTo(userType) {
+        // Redirect to the corresponding login page based on user type
+        window.location.href = userType;
+    }
+</script>
+
+</body>
+</html>

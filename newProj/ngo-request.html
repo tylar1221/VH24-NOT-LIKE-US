@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Product Request</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        .request-details {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>NGO Product Request</h1>
+
+        <div id="ngoDetails" class="request-details">
+            <!-- NGO details and request will be displayed here -->
+        </div>
+
+        <button id="nextButton" class="btn btn-primary btn-block mt-4">Select Nearby Shops</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const selectedNGO = JSON.parse(localStorage.getItem("selectedNGO"));
+            
+            if (selectedNGO) {
+                const ngoDetailsDiv = document.getElementById("ngoDetails");
+                ngoDetailsDiv.innerHTML = `
+                    <h3>NGO Name: ${selectedNGO.name}</h3>
+                    <p><strong>Location:</strong> (${selectedNGO.lat}, ${selectedNGO.lng})</p>
+                    <p><strong>Request:</strong> <em>10 bags of rice, 5 liters of cooking oil, 20 blankets</em></p>
+                `;
+            }
+
+            document.getElementById("nextButton").addEventListener("click", function () {
+                window.location.href = "shop-approve.html";
+            });
+        });
+    </script>
+
+</body>
+
+</html>

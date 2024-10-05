@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Registration Form</title>
+    <link rel="stylesheet" href="form.css"> <!-- Link to your CSS for styling -->
+    <style>
+        /* Add the CSS styles directly here for demonstration purposes */
+        body {
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif; /* Set font */
+            background-color: #f9f9f9; /* Light background color */
+        }
+
+        .container {
+            padding: 20px; /* Padding for the container */
+            background-color: #ffffff; /* White background for the form */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            max-width: 400px; /* Max width for the form */
+            width: 100%; /* Full width */
+            color: #333; /* Dark text color */
+        }
+
+        h1 {
+            text-align: center; /* Center the heading */
+            color: #410229; /* Dark color for the heading */
+        }
+
+        form {
+            display: flex; /* Flexbox for form layout */
+            flex-direction: column; /* Stack elements vertically */
+            gap: 15px; /* Gap between elements */
+        }
+
+        label {
+            font-size: 18px; /* Font size for labels */
+            margin-bottom: 5px; /* Space below labels */
+            color: #410229; /* Dark color for labels */
+        }
+
+        input, select, textarea {
+            padding: 10px; /* Padding for inputs */
+            border-radius: 8px; /* Rounded corners */
+            border: 1px solid #3498db; /* Blue border */
+            outline: none; /* Remove outline */
+            background-color: #fff; /* White background for inputs */
+            color: #333; /* Dark text color */
+            transition: border-color 0.3s; /* Transition effect for border */
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #FFC0CB; /* Change border color on focus */
+        }
+
+        button {
+            padding: 10px; /* Padding for buttons */
+            background-color: #3498db; /* Blue background for buttons */
+            border: none; /* Remove border */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 18px; /* Font size for buttons */
+            color: #fff; /* White text */
+            cursor: pointer; /* Change cursor on hover */
+            transition: background-color 0.3s; /* Transition effect for button */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> <!-- Container to center the form -->
+        <h1>Volunteer Registration</h1>
+        <form action="/volunteer-form" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="activity">What would you like to volunteer for?</label>
+            <select id="activity" name="activity" required>
+                <option value="" disabled selected>Select an activity</option>
+                <option value="food distribution">Food Distribution</option>
+                <option value="event organization">Event Organization</option>
+                <option value="community cleanup">Community Cleanup</option>
+                <option value="mentorship">Mentorship</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="additionalInfo">Additional Information:</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Please provide any other relevant details..."></textarea>
+
+            <button type="submit">Submit Volunteer Application</button>
+        </form>
+    </div>
+</body>
+</html>

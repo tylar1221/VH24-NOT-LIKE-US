@@ -1,0 +1,150 @@
+<div class="newsletter-page">
+    <div class="newsletter-subscription">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with our latest events, donation needs, and success stories from our community. Join us in making a difference!</p>
+        <form id="newsletterForm" onsubmit="subscribe(event)">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <div id="subscriptionMessage" class="message"></div>
+    </div>
+
+    <div class="newsletter-info">
+        <h3>What to Expect</h3>
+        <ul>
+            <li>Monthly updates on our ongoing projects.</li>
+            <li>Information on upcoming events and how you can participate.</li>
+            <li>Success stories highlighting the impact of your donations.</li>
+            <li>Exclusive offers and opportunities to contribute.</li>
+        </ul>
+    </div>
+
+    <div class="testimonials">
+        <h3>What Our Subscribers Say</h3>
+        <blockquote>"Subscribing to the newsletter keeps me informed about the amazing work being done!" - <em>Jane Doe</em></blockquote>
+        <blockquote>"I love knowing how my donations are making a difference in the community!" - <em>John Smith</em></blockquote>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Donation Platform. All rights reserved.</p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a>
+    </div>
+</div>
+
+<style>
+.newsletter-page {
+    background-color: #fff4f9; /* Very light pink background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.newsletter-subscription {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.newsletter-subscription h2 {
+    text-align: center;
+    color: #ff4d94; /* Pink color */
+}
+
+.newsletter-subscription p {
+    text-align: center;
+    color: #333; /* Darker text for better readability */
+}
+
+.newsletter-subscription input {
+    width: calc(100% - 120px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffb3d9; /* Light pink border */
+    margin-bottom: 10px;
+}
+
+.newsletter-subscription button {
+    background-color: #ff4d94; /* Pink button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.newsletter-subscription button:hover {
+    background-color: #ff3385; /* Darker pink on hover */
+}
+
+.message {
+    margin-top: 10px;
+    text-align: center;
+    color: #28a745; /* Green color for success message */
+}
+
+.newsletter-info, .testimonials {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-info h3, .testimonials h3 {
+    color: #ff4d94; /* Pink color */
+}
+
+.newsletter-info ul {
+    padding-left: 20px;
+}
+
+.testimonials blockquote {
+    font-style: italic;
+    margin: 10px 0;
+    border-left: 3px solid #ff4d94; /* Pink border for blockquote */
+    padding-left: 10px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #333; /* Darker text for readability */
+}
+
+.footer a {
+    color: #ff4d94; /* Pink links */
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+</style>
+
+<script>
+function subscribe(event) {
+    event.preventDefault(); // Prevent form submission
+
+    const email = document.getElementById('email').value;
+    const subscriptionMessage = document.getElementById('subscriptionMessage');
+
+    // Simulate an API call or logic to handle subscription
+    const subscribers = []; // Array to hold subscribed emails (simulating database)
+    
+    if (subscribers.includes(email)) {
+        subscriptionMessage.textContent = 'You are already subscribed!';
+        subscriptionMessage.style.color = '#dc3545'; // Red color for error message
+    } else {
+        subscribers.push(email);
+        subscriptionMessage.textContent = 'Thank you for subscribing!';
+        document.getElementById('newsletterForm').reset(); // Reset the form
+    }
+
+    console.log("Current Subscribers:", subscribers); // Display current subscribers in console
+}
+</script>

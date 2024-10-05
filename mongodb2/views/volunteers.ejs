@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Data</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+
+    <div class="volunteers-container" style="max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);"> <!-- Volunteers Data Container -->
+        <h1 style="text-align: center; color: #333;">Volunteers Data</h1>
+        <div class="card-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;"> <!-- Card Container -->
+            <% volunteers.forEach(volunteer => { %>
+                <div class="volunteer-card" style="background-color: #e9ecef; border-radius: 10px; padding: 15px; width: 300px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+                    <p style="margin: 10px 0; color: #555;"><strong>Name:</strong> <%= volunteer.name %></p>
+                    <p style="margin: 10px 0; color: #555;"><strong>Email:</strong> <%= volunteer.email %></p>
+                    <p style="margin: 10px 0; color: #555;"><strong>Phone:</strong> <%= volunteer.phone %></p>
+                    <p style="margin: 10px 0; color: #555;"><strong>Skills:</strong> <%= volunteer.skills ? volunteer.skills.join(', ') : 'No skills provided' %></p>
+                    <p style="margin: 10px 0; color: #555;"><strong>Availability:</strong> <%= volunteer.availability %></p>
+                    <button class="contact-button" onclick="handleVolunteer('<%= volunteer.name %>')" style="background-color: #3498db; color: white; border: none; border-radius: 5px; padding: 10px; cursor: pointer; float: right; transition: background-color 0.3s;">Contact</button>
+                </div>
+            <% }); %>
+        </div> <!-- End of Card Container -->
+    </div> <!-- End of Volunteers Data Container -->
+
+    <script>
+        function handleVolunteer(name) {
+            alert("Contacting volunteer: " + name);
+        }
+    </script>
+
+</body>
+</html>

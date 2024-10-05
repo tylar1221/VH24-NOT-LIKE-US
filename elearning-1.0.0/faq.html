@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f9fc; /* Light background for the body */
+            margin: 0;
+            padding: 20px;
+        }
+        .faq {
+            background-color: #ffffff; /* White background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        .faq h2 {
+            text-align: center;
+            color: #007bff; /* Blue color */
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #007bff; /* Blue border */
+            border-radius: 8px;
+            background-color: #e6f7ff; /* Very light blue background */
+        }
+        .faq-item h3 {
+            color: #007bff; /* Blue color */
+        }
+        .faq-item p {
+            margin: 5px 0 0; /* Adjusted margin for better spacing */
+            color: #333; /* Darker text for better readability */
+        }
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            padding: 10px;
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search FAQs..." onkeyup="filterFAQs()">
+        </div>
+        <div class="faq-item">
+            <h3>How can I donate?</h3>
+            <p>You can donate by selecting the items you wish to contribute to and clicking the "Complete Donation" button.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Is my donation tax-deductible?</h3>
+            <p>Yes, all donations made through our platform are tax-deductible.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What types of donations are accepted?</h3>
+            <p>We accept monetary donations, food items, clothing, and other essentials. Please check our donation page for specific items needed.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How do I know if my donation has been received?</h3>
+            <p>You will receive a confirmation email once your donation has been successfully processed.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I donate items instead of money?</h3>
+            <p>Yes, we encourage item donations as well. You can find a list of needed items on our donation page.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How are donations distributed?</h3>
+            <p>Donations are distributed to partner organizations that help those in need based on their specific requirements.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Who can I contact for more information?</h3>
+            <p>You can reach out to our support team via the contact form on our website or email us directly at support@example.com.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Are there any fees associated with donating?</h3>
+            <p>No, we do not charge any fees for donations. 100% of your donation goes directly to those in need.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I set up a recurring donation?</h3>
+            <p>Yes, you can set up a recurring donation on our donation page. Choose the frequency that works for you.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What happens if I change my mind after donating?</h3>
+            <p>If you wish to cancel your donation, please contact our support team as soon as possible. Refunds may be available under certain conditions.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can I donate in honor of someone?</h3>
+            <p>Absolutely! During the donation process, you can specify if your donation is in honor of a loved one, and we will send them a notification.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Are donations anonymous?</h3>
+            <p>Yes, you can choose to make your donation anonymous. Just select the appropriate option during the donation process.</p>
+        </div>
+    </div>
+
+    <script>
+        function filterFAQs() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const faqItems = document.getElementsByClassName('faq-item');
+
+            for (let i = 0; i < faqItems.length; i++) {
+                const item = faqItems[i];
+                const question = item.getElementsByTagName('h3')[0];
+
+                if (question.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    item.style.display = ""; // Show item
+                } else {
+                    item.style.display = "none"; // Hide item
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

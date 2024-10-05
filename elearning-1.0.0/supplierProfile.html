@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopkeeper Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        body {
+            background-color: #f0f2f5; /* Soft background color */
+            font-family: "Arial", sans-serif; /* Font style */
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: white; /* White background for the container */
+        }
+
+        h1 {
+            color: #343a40; /* Dark color for the title */
+            margin-bottom: 30px; /* Space below the title */
+        }
+
+        .card {
+            border: none; /* No border for cards */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            height: 100%; /* Ensure both cards have the same height */
+        }
+
+        .card-header {
+            background-color: #007bff; /* Blue header */
+            color: white; /* White text */
+            border-top-left-radius: 10px; /* Rounded corners */
+            border-top-right-radius: 10px; /* Rounded corners */
+        }
+
+        .table th {
+            background-color: #e9ecef; /* Light gray for table header */
+            font-weight: bold; /* Bold text for headers */
+        }
+
+        .table td {
+            vertical-align: middle; /* Centered vertically */
+        }
+
+        .table {
+            margin-top: 20px; /* Space above the table */
+        }
+
+        .status-button {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .can-satisfy {
+            background-color: #28a745; /* Green for Can Satisfy */
+            color: white; /* White text */
+        }
+
+        .cannot-satisfy {
+            background-color: #dc3545; /* Red for Cannot Satisfy */
+            color: white; /* White text */
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px; /* Reduce padding on small screens */
+            }
+
+            h1 {
+                font-size: 24px; /* Smaller title */
+            }
+
+            .table {
+                font-size: 14px; /* Smaller table text */
+            }
+        }
+    </style>
+    <script>
+        function toggleStatus(button) {
+            if (button.innerText === "Can Satisfy") {
+                button.innerText = "Cannot Satisfy";
+                button.classList.remove("can-satisfy");
+                button.classList.add("cannot-satisfy");
+            } else {
+                button.innerText = "Can Satisfy";
+                button.classList.remove("cannot-satisfy");
+                button.classList.add("can-satisfy");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <a href="index.html" style="text-decoration: none">
+        <button style="
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+          ">
+            Back
+        </button>
+    </a>
+    <div class="container">
+        <h1 class="text-center">Shopkeeper Profile</h1>
+
+        <!-- Shopkeeper Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-user"></i> Shopkeeper Information</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> Aarti Desai</p>
+                <p><strong>Email:</strong> aarti.desai@example.com</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Shop Name:</strong> Aarti's Kirana Store</p>
+                <p><strong>Address:</strong> 1234 Gandhi Nagar, Mumbai, India</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <!-- Orders Received Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-shopping-cart"></i> Orders Received</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Order Date</th>
+                                    <th>Customer Name</th>
+                                    <th>Items Ordered</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>October 1, 2024</td>
+                                    <td>Ravi Kumar</td>
+                                    <td>Rice, Dal</td>
+                                    <td>
+                                        <button class="status-button can-satisfy" onclick="toggleStatus(this)">Can Satisfy</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>October 2, 2024</td>
+                                    <td>Sita Sharma</td>
+                                    <td>Tea, Sugar</td>
+                                    <td>
+                                        <button class="status-button cannot-satisfy" onclick="toggleStatus(this)">Cannot Satisfy</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>October 3, 2024</td>
+                                    <td>Rahul Singh</td>
+                                    <td>Oil, Spices</td>
+                                    <td>
+                                        <button class="status-button can-satisfy" onclick="toggleStatus(this)">Can Satisfy</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <!-- Items Available Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-box"></i> Items Available</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Rice</td>
+                                    <td>100 kg</td>
+                                    <td>₹40</td>
+                                </tr>
+                                <tr>
+                                    <td>Dal</td>
+                                    <td>50 kg</td>
+                                    <td>₹80</td>
+                                </tr>
+                                <tr>
+                                    <td>Tea</td>
+                                    <td>30 kg</td>
+                                    <td>₹200</td>
+                                </tr>
+                                <tr>
+                                    <td>Sugar</td>
+                                    <td>20 kg</td>
+                                    <td>₹50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

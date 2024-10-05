@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select NGO Based on Location</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        .map-container {
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        .ngo-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Select an NGO Near You</h1>
+
+        <div id="map" class="map-container"></div>
+
+        <div class="ngo-list">
+            <h3>NGOs near your location:</h3>
+            <ul id="ngoList" class="list-group">
+                <!-- NGO list will be populated here -->
+            </ul>
+        </div>
+
+        <button id="nextButton" class="btn btn-primary btn-block mt-4" disabled>Proceed to NGO Request</button>
+    </div>
+
+    <script>
+        let selectedNGO = null;
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: { lat: -34.397, lng: 150.644 }, // Default center, will be updated to user's location
+            });
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+
+                        map.setCenter(pos);
+
+                        // Call to get nearby NGOs (replace with actual data source)
+                        fetch('ngos.csv')
+                            .then(response => response.text())
+                            .then(data => {
+                                const ngos = data.split('\n').map(row => {
+                                    const [name, lat, lng] = row.split(',');
+                                    return { name, lat: parseFloat(lat), lng: parseFloat(lng) };
+                                });
+
+                                ngos.forEach(ngo => {
+                                    const marker = new google.maps.marker.AdvancedMarkerElement({
+                                        position: { lat: ngo.lat, lng: ngo.lng },
+                                        map: map,
+                                        title: ngo.name,
+                                    });
+
+                                    marker.addListener('click', () => {
+                                        selectedNGO = ngo;
+                                        document.getElementById('nextButton').disabled = false;
+                                        alert(`Selected NGO: ${ngo.name}`);
+                                    });
+                                });
+                            })
+                            .catch(error => console.error('Error fetching NGO data:', error));
+                    },
+                    () => {
+                        handleLocationError(true, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, pos) {
+            alert(
+                browserHasGeolocation
+                    ? "Error: The Geolocation service failed."
+                    : "Error: Your browser doesn't support geolocation."
+            );
+        }
+
+        // Proceed to the next step (NGO request)
+        document.getElementById("nextButton").addEventListener("click", function () {
+            if (selectedNGO) {
+                // Store selected NGO in localStorage and navigate to NGO request page
+                localStorage.setItem("selectedNGO", JSON.stringify(selectedNGO));
+                window.location.href = "ngo-request.html";
+            }
+        });
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcfm6dAMCDP6q4mzXBNi4jBUbxi0GMFn4&callback=initMap&v=beta"></script>
+
+</body>
+
+</html>

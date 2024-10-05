@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donor Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f0f2f5;
+            /* Soft background color */
+            font-family: "Arial", sans-serif;
+            /* Font style */
+        }
+        
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            /* White background for the container */
+        }
+        
+        h1 {
+            color: #343a40;
+            /* Dark color for the title */
+            margin-bottom: 30px;
+            /* Space below the title */
+        }
+        
+        .card {
+            border: none;
+            /* No border for cards */
+            border-radius: 10px;
+            /* Rounded corners */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+        
+        .card-header {
+            background-color: #007bff;
+            /* Blue header */
+            color: white;
+            /* White text */
+            border-top-left-radius: 10px;
+            /* Rounded corners */
+            border-top-right-radius: 10px;
+            /* Rounded corners */
+        }
+        
+        .table th {
+            background-color: #e9ecef;
+            /* Light gray for table header */
+            font-weight: bold;
+            /* Bold text for headers */
+        }
+        
+        .table td {
+            vertical-align: middle;
+            /* Centered vertically */
+        }
+        
+        .table {
+            margin-top: 20px;
+            /* Space above the table */
+        }
+        /* Responsive design for small devices */
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+                /* Reduce padding on small screens */
+            }
+            h1 {
+                font-size: 24px;
+                /* Smaller title */
+            }
+            .table {
+                font-size: 14px;
+                /* Smaller table text */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Donor Profile</h1>
+
+        <!-- Donor Information Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Donor Information</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> Amit Sharma</p>
+                <p><strong>Email:</strong> amit.sharma@example.com</p>
+                <p><strong>Phone:</strong> +91 98765 43210</p>
+                <p><strong>Address:</strong> 1234, MG Road, Mumbai, Maharashtra, India</p>
+                <p><strong>Account Created:</strong> 1st January 2023</p>
+            </div>
+        </div>
+
+        <!-- Donation History Section -->
+        <a href="javascript:history.back()" style="text-decoration: none">
+            <button style="background-color: #007bff; color: white; border: none; border-radius: 5px; padding: 10px 15px; font-size: 16px; cursor: pointer; position: absolute; top: 20px; left: 20px;">
+                Back
+            </button>
+        </a>
+        <div class="card">
+            <div class="card-header">
+                <h4>Donation History</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount (INR)</th>
+                            <th>Shop</th>
+                            <th>Items Donated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>March 1, 2024</td>
+                            <td>₹7,000</td>
+                            <td>Local Kirana Store</td>
+                            <td>Rice, Lentils, Canned Vegetables</td>
+                        </tr>
+                        <tr>
+                            <td>February 15, 2024</td>
+                            <td>₹3,500</td>
+                            <td>Neighborhood Grocery</td>
+                            <td>Spaghetti, Tomato Sauce</td>
+                        </tr>
+                        <tr>
+                            <td>January 10, 2024</td>
+                            <td>₹5,500</td>
+                            <td>Community Food Bank</td>
+                            <td>Cereal, Milk</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

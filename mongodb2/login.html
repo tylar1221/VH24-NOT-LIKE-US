@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Login</title>
+    <link rel="stylesheet" href="form.css"> <!-- Optional: Include your CSS -->
+</head>
+<body>
+    <div class="container">
+        <h2>Donor Login</h2>
+        <form action="/login" method="post">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required> <!-- Password field added -->
+
+            <button type="submit">Login</button>
+        </form>
+        <p>New donor? <a href="/donor-form">Register here</a>.</p>
+    </div>
+</body>
+</html>

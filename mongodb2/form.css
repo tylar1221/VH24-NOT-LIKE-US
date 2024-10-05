@@ -1,0 +1,103 @@
+:root {
+    --primary: #FFC0CB; /* Pink */
+    --light: #fcf0fa; 
+    --dark: #410229; 
+    --blue: #F2ACB9; /* Blue */
+}
+
+body {
+    background-color: #ffffff; /* Set background to white */
+    font-family: Arial, sans-serif; /* Use Arial font */
+}
+
+.container {
+    padding: 20px; /* Increased padding for more space */
+    max-width: 600px; /* Increased maximum width for better layout */
+    margin: 100px auto; /* Center the container */
+    background-color: #f9f9f9; /* Light background for the container */
+    color: #333; /* Dark text for better readability */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+}
+
+form {
+    display: flex; /* Flexbox layout for form */
+    flex-direction: column; /* Column direction for form elements */
+    gap: 15px; /* Increased gap between elements */
+    padding: 15px; /* Padding inside the form */
+}
+
+form label {
+    font-size: 18px; /* Font size for labels */
+    margin-bottom: 5px; /* Margin below labels */
+    color: var(--dark); /* Dark color for labels */
+}
+
+form input,
+form select,
+form textarea {
+    padding: 10px; /* Increased padding for better input area */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid var(--blue); /* Blue border */
+    outline: none; /* Remove outline */
+    background-color: #fff; /* White background for inputs */
+    color: #333; /* Dark text for inputs */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--primary); /* Change border color on focus */
+}
+
+form textarea {
+    resize: vertical; /* Allow vertical resizing of textarea */
+    min-height: 100px; /* Minimum height for the textarea */
+}
+
+form button {
+    padding: 10px; /* Increased padding for the main submit button */
+    background-color: var(--blue); /* Blue background for buttons */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 18px; /* Font size for the button */
+    color: #fff; /* White text for buttons */
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+form button:hover {
+    background-color: #F2ACB9; /* Darker blue on hover */
+}
+
+/* Volunteer Section Styles */
+.volunteer-section {
+    margin-top: 30px; /* Space above the volunteer section */
+}
+
+.volunteer-section h2 {
+    color: var(--dark); /* Dark color for section heading */
+    text-align: center; /* Center the section heading */
+}
+
+.volunteer-section p {
+    font-size: 16px; /* Font size for paragraph text */
+    color: #555; /* Darker gray for better readability */
+    text-align: center; /* Center the paragraph text */
+}
+
+.volunteer-section input[type="text"],
+.volunteer-section input[type="email"],
+.volunteer-section textarea {
+    padding: 10px; /* Padding for input fields */
+    border: 1px solid var(--blue); /* Blue border */
+}
+
+.volunteer-section button {
+    background-color: var(--primary); /* Pink background for volunteer button */
+    color: #fff; /* White text */
+}
+
+.volunteer-section button:hover {
+    background-color: #ff69b4; /* Lighter pink on hover */
+}

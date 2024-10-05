@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css">
+    <title>Request Form</title>
+</head>
+<body>
+    <div class="container"> <!-- Added container div -->
+        <form action="/request-form" method="POST">
+            <label for="org_name">Organization Name:</label>
+            <input type="text" id="org_name" name="org_name" required>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Medicines">Medicines</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Stationery">Stationery</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <label for="item">Item:</label>
+            <input type="text" id="item" name="item" required>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" placeholder="Why do you want it?" required>
+
+            <label for="quantity">Quantity:</label>
+            <div class="quantity-control"> <!-- Updated class name -->
+                <button type="button" id="decrement">-</button>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+                <button type="button" id="increment">+</button>
+            </div>
+
+            <label for="cost">Cost in Rupees:</label>
+            <input type="number" id="cost" name="cost" min="0" required>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </div> <!-- End of container div -->
+
+    <script>
+        // Increment and decrement logic for quantity
+        const quantityInput = document.getElementById('quantity');
+        document.getElementById('increment').addEventListener('click', () => {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        });
+        document.getElementById('decrement').addEventListener('click', () => {
+            if (quantityInput.value > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+            }
+        });
+    </script>
+</body>
+</html>
